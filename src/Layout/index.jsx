@@ -4,7 +4,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <NavBar />
-      <main className='mt-16'>{children}</main>
+      <main className='mt-16 flex flex-col items-center'>{children}</main>
     </>
   );
 };
