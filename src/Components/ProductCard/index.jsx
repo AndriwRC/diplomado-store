@@ -3,8 +3,8 @@ import { HiPlus } from 'react-icons/hi';
 import { HiCheck } from 'react-icons/hi';
 import { AppContext } from '../../Context';
 
-function ProductCard({ product }) {
-  const { cartProducts, addProductToCart } = useContext(AppContext);
+const ProductCard = ({ product }) => {
+  const { openCart, cartProducts, addProductToCart } = useContext(AppContext);
 
   const isInCart = cartProducts.find((item) => item.id === product.id);
 
@@ -23,6 +23,7 @@ function ProductCard({ product }) {
           onClick={(e) => {
             e.stopPropagation();
             addProductToCart(product);
+            openCart();
           }}
         >
           <span>
@@ -43,6 +44,6 @@ function ProductCard({ product }) {
       </p>
     </div>
   );
-}
+};
 
 export default ProductCard;

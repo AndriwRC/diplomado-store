@@ -1,11 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { HiShoppingBag } from 'react-icons/hi';
 import CategoriesMenu from './CategoriesMenu';
 import UserMenu from './UserMenu';
+import { AppContext } from '../../Context';
 
 const Navbar = () => {
   const [showCategories, setShowCategories] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const { toggleCart, cartProducts } = useContext(AppContext);
 
   // Dynamic Styles
   const stateClassName = (isActive) =>
@@ -35,11 +37,11 @@ const Navbar = () => {
         showMenu={showUserMenu}
       />
       {/* Shopping Cart */}
-      <li className='flex items-center cursor-pointer'>
+      <li className='flex items-center cursor-pointer' onClick={toggleCart}>
         <span>
           <HiShoppingBag className='h-6 w-6 text-black' />
         </span>
-        0
+        {cartProducts.length}
       </li>
     </nav>
   );

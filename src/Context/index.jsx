@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react';
 import { useFetch } from '../Hooks/useFetch';
+import { useAsideMenu } from '../Hooks/useAsideMenu';
 
 const AppContext = createContext();
 
@@ -12,7 +13,6 @@ const AppContextProvider = ({ children }) => {
 
   // Shopping Cart
   const [cartProducts, setCartProducts] = useState([]);
-  console.log(cartProducts);
 
   const addProductToCart = (product) => {
     if (!cartProducts.includes(product))
@@ -26,11 +26,22 @@ const AppContextProvider = ({ children }) => {
     setCartProducts(filteredProducts);
   };
 
+  const {
+    isOpen: isCartOpen,
+    openMenu: openCart,
+    closeMenu: closeCart,
+    toggleMenu: toggleCart,
+  } = useAsideMenu(false);
+
   return (
     <AppContext.Provider
       value={{
         products,
         productsLoading,
+        isCartOpen,
+        openCart,
+        closeCart,
+        toggleCart,
         cartProducts,
         addProductToCart,
         removeProductFromCart,

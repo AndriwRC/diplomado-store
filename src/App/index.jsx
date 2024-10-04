@@ -1,7 +1,7 @@
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AppContextProvider as Provider } from '../Context';
 import Routes from '../Routes';
-import Layout from '../Layout';
+import Layout from '../Components/Layout';
 
 function App() {
   return (
