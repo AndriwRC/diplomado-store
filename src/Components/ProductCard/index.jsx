@@ -4,12 +4,16 @@ import { HiCheck } from 'react-icons/hi';
 import { AppContext } from '../../Context';
 
 const ProductCard = ({ product }) => {
-  const { openCart, cartProducts, addProductToCart } = useContext(AppContext);
+  const { showProduct, cartProducts, addProductToCart } =
+    useContext(AppContext);
 
   const isInCart = cartProducts.find((item) => item.id === product.id);
 
   return (
-    <div className='w-56 h-60 rounded-lg bg-white cursor-pointer'>
+    <div
+      className='w-56 h-60 rounded-lg bg-white cursor-pointer'
+      onClick={() => showProduct(product)}
+    >
       <figure className='relative w-full h-4/5'>
         <img
           className='w-full h-full object-cover rounded-lg'
@@ -23,7 +27,6 @@ const ProductCard = ({ product }) => {
           onClick={(e) => {
             e.stopPropagation();
             addProductToCart(product);
-            openCart();
           }}
         >
           <span>

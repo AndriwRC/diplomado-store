@@ -11,12 +11,27 @@ const AppContextProvider = ({ children }) => {
     `${API}/products`
   );
 
+  // Product Details
+  const [productToShow, setProductToShow] = useState({});
+  const {
+    isOpen: isDetailsOpen,
+    openMenu: openDetails,
+    closeMenu: closeDetails,
+  } = useAsideMenu(false);
+
+  const showProduct = (product) => {
+    setProductToShow(product);
+    openDetails();
+    closeCart();
+  };
+
   // Shopping Cart
   const [cartProducts, setCartProducts] = useState([]);
 
   const addProductToCart = (product) => {
     if (!cartProducts.includes(product))
       setCartProducts([...cartProducts, product]);
+    openCart();
   };
 
   const removeProductFromCart = (id) => {
@@ -38,8 +53,11 @@ const AppContextProvider = ({ children }) => {
       value={{
         products,
         productsLoading,
+        productToShow,
+        showProduct,
+        isDetailsOpen,
+        closeDetails,
         isCartOpen,
-        openCart,
         closeCart,
         toggleCart,
         cartProducts,

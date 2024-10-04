@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { AppContext } from '../../Context';
 import ProductCard from '../../Components/ProductCard';
+import ProductDetails from '../../Components/ProductDetails';
 
 const Store = () => {
   const { products, productsLoading } = useContext(AppContext);
@@ -28,7 +29,7 @@ const Store = () => {
           products.map((item) => <ProductCard key={item.id} product={item} />)
         )}
       </div>
-      {/* <ProductDetail /> */}
+      <ProductDetails />
     </>
   );
 };

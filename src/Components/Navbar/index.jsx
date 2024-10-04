@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { HiShoppingBag } from 'react-icons/hi';
+import { HiOutlineShoppingCart } from 'react-icons/hi';
 import CategoriesMenu from './CategoriesMenu';
 import UserMenu from './UserMenu';
 import { AppContext } from '../../Context';
@@ -39,7 +39,7 @@ const Navbar = () => {
       {/* Shopping Cart */}
       <li className='flex items-center cursor-pointer' onClick={toggleCart}>
         <span>
-          <HiShoppingBag className='h-6 w-6 text-black' />
+          <HiOutlineShoppingCart className='h-6 w-6 text-black' />
         </span>
         {cartProducts.length}
       </li>
