@@ -25,15 +25,7 @@ const Store = () => {
             No tenemos esta clase de producto en el momento. {':('}
           </p>
         ) : (
-          products.map((item) => (
-            <ProductCard
-              key={item.id}
-              title={item.nombre}
-              category={item.categoria}
-              img={'https://loremflickr.com/320/240'}
-              price={item.precio}
-            />
-          ))
+          products.map((item) => <ProductCard key={item.id} product={item} />)
         )}
       </div>
       {/* <ProductDetail /> */}
