@@ -9,6 +9,7 @@ const Routes = () => {
     { path: '/', element: <Home /> },
     { path: '/admin', element: <Admin /> },
     { path: '/store', element: <Store /> },
+    { path: '/store/:category', element: <Store /> },
     { path: '/*', element: <NotFound /> },
   ]);
 };

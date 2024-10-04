@@ -42,7 +42,7 @@ const CategoriesMenu = ({ stateClassName, toggleMenu, showMenu }) => {
         </li>
         <li>
           <NavLink
-            to='/camisetas'
+            to='/store/camiseta'
             className={({ isActive }) => stateClassName(isActive)}
           >
             Camisetas
@@ -50,7 +50,7 @@ const CategoriesMenu = ({ stateClassName, toggleMenu, showMenu }) => {
         </li>
         <li>
           <NavLink
-            to='/jeans'
+            to='/store/jean'
             className={({ isActive }) => stateClassName(isActive)}
           >
             Jeans
@@ -58,7 +58,7 @@ const CategoriesMenu = ({ stateClassName, toggleMenu, showMenu }) => {
         </li>
         <li>
           <NavLink
-            to='/zapatos'
+            to='/store/zapato'
             className={({ isActive }) => stateClassName(isActive)}
           >
             Zapatos

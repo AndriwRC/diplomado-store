@@ -1,13 +1,25 @@
 import { useContext, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { AppContext } from '../../Context';
 import ProductCard from '../../Components/ProductCard';
 import ProductDetails from '../../Components/ProductDetails';
 
 const Store = () => {
   const { products, productsLoading } = useContext(AppContext);
+
+  let filteredProducts = products;
+
+  // Filter by category
+  const { category } = useParams();
+  if (category)
+    filteredProducts = filteredProducts.filter(
+      (product) => product.categoria.toLocaleLowerCase() === category
+    );
+
+  // Filter by name
   const [searchValue, setSearchValue] = useState('');
 
-  const filteredProducts = products.filter((product) =>
+  filteredProducts = filteredProducts?.filter((product) =>
     product.nombre
       .toLocaleLowerCase()
       .includes(searchValue.toLocaleLowerCase().trim())
@@ -28,7 +40,7 @@ const Store = () => {
           <p className='col-span-4 text-center font-light'>
             Cargando Productos...
           </p>
-        ) : products.length === 0 ? (
+        ) : filteredProducts.length === 0 ? (
           <p className='col-span-4 text-center font-light'>
             No tenemos esta clase de producto en el momento. {':('}
           </p>
