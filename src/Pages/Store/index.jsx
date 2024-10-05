@@ -2,7 +2,6 @@ import { useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { AppContext } from '../../Context';
 import ProductCard from '../../Components/ProductCard';
-import ProductDetails from '../../Components/ProductDetails';
 
 const Store = () => {
   const { products, productsLoading } = useContext(AppContext);
@@ -50,7 +49,6 @@ const Store = () => {
           ))
         )}
       </div>
-      <ProductDetails />
     </>
   );
 };

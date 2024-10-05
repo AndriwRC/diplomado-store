@@ -32,6 +32,7 @@ const AppContextProvider = ({ children }) => {
     if (!cartProducts.includes(product))
       setCartProducts([...cartProducts, product]);
     openCart();
+    closeDetails();
   };
 
   const removeProductFromCart = (id) => {
