@@ -5,13 +5,22 @@ import AsideMenu from '../AsideMenu';
 import OrderItem from '../OrderItem';
 
 const Cart = () => {
-  const { cartProducts, isCartOpen, closeCart } = useContext(AppContext);
+  const { cartProducts, isCartOpen, closeCart, discount } =
+    useContext(AppContext);
 
   const totalPrice = parseFloat(
     cartProducts
       .reduce((total, product) => total + parseFloat(product.precio), 0)
       .toFixed(2)
   );
+
+  const applyDiscount = (discount, price) => {
+    let finalPrice = null;
+    if (discount !== 0) {
+      finalPrice = (price - price * discount).toFixed(2);
+    }
+    return finalPrice;
+  };
 
   return (
     <AsideMenu
@@ -29,9 +38,22 @@ const Cart = () => {
         ))}
       </div>
       <div className='p-6'>
-        <p className='flex justify-between items-center mb-2'>
-          <span className='font-light'>Total:</span>
-          <span className='font-medium text-2xl'>${totalPrice}</span>
+        <p className={discount ? 'text-red-500 font-medium' : 'hidden'}>
+          Tienes un cupón de descuento aplicado ¡Disfrútalo!
+        </p>
+        <p className='flex justify-between items-center gap-4 mb-2'>
+          <span className='font-light grow'>Total:</span>
+          <span
+            className={
+              (discount ? 'line-through text-red-700 ' : 'font-medium ') +
+              'text-2xl'
+            }
+          >
+            ${totalPrice}
+          </span>
+          <span className={discount ? 'font-medium text-2xl' : 'hidden'}>
+            ${applyDiscount(discount, totalPrice)}
+          </span>
         </p>
         <Link to='/my-orders/last'>
           <button

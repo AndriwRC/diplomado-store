@@ -18,18 +18,20 @@ const Home = () => {
     {
       title: 'Llegó Halloween',
       discount: 'Obtén hasta un 50%',
+      value: 0.5,
       image:
         'https://images.unsplash.com/photo-1477659803863-c1bf91b34c90?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
     {
       title: '¡Estamos de Aniversario!',
       discount: 'Hasta un 75% de descuento',
+      value: 0.75,
       image:
         'https://images.unsplash.com/photo-1633683788845-e9db07766e42?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     },
   ];
 
-  const { products, productsLoading } = useContext(AppContext);
+  const { products, productsLoading, setDiscount } = useContext(AppContext);
   const popularProducts = products?.slice(0, 3);
 
   return (
@@ -70,7 +72,7 @@ const Home = () => {
                 <div className='p-6'>
                   <h3 className='text-xl font-bold mb-2'>{offer.title}</h3>
                   <p className='text-red-500 font-semibold'>{offer.discount}</p>
-                  <Link to={'/store'}>
+                  <Link to={'/store'} onClick={() => setDiscount(offer.value)}>
                     <button className='mt-4 bg-neutral-800 hover:bg-neutral-950 text-white font-bold py-2 px-4 rounded-lg'>
                       Comprar Ahora
                     </button>

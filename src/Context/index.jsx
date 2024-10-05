@@ -49,6 +49,9 @@ const AppContextProvider = ({ children }) => {
     toggleMenu: toggleCart,
   } = useAsideMenu(false);
 
+  // Discount
+  const [discount, setDiscount] = useState(0);
+
   return (
     <AppContext.Provider
       value={{
@@ -64,6 +67,8 @@ const AppContextProvider = ({ children }) => {
         cartProducts,
         addProductToCart,
         removeProductFromCart,
+        discount,
+        setDiscount,
       }}
     >
       {children}
