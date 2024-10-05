@@ -33,13 +33,14 @@ function SignUpForm({ setShowSignUpForm, formMode }) {
 
   return (
     <form
+      ref={form}
       className='flex flex-col w-72 sm:w-80 bg-white'
       onSubmit={(e) => {
         e.preventDefault();
         createAccount();
       }}
     >
-      <label htmlFor='name'>Your name:</label>
+      <label htmlFor='name'>Nombre:</label>
       <input
         className='mt-1 mb-6 p-3 border border-black rounded-lg text-sm'
         id='name'
@@ -47,7 +48,7 @@ function SignUpForm({ setShowSignUpForm, formMode }) {
         placeholder='Peter'
         required
       />
-      <label htmlFor='email'>Your e-mail:</label>
+      <label htmlFor='email'>e-mail:</label>
       <input
         className='mt-1 mb-6 p-3 border border-black rounded-lg text-sm'
         id='email'
@@ -55,7 +56,7 @@ function SignUpForm({ setShowSignUpForm, formMode }) {
         placeholder='h1@helloworld.com'
         required
       />
-      <label htmlFor='pass'>Your password:</label>
+      <label htmlFor='pass'>Crea tu contraseña:</label>
       <input
         className='mt-1 mb-6 p-3 border border-black rounded-lg text-sm'
         id='pass'

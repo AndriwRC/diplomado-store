@@ -57,7 +57,7 @@ const LogInForm = ({ setShowSignUpForm }) => {
       >
         <div className='flex flex-wrap justify-between gap-4 p-4'>
           <label className='w-1/3 text-end' htmlFor='user'>
-            user:
+            usuario:
           </label>
           <input
             className='w-3/5 border-b-2 border-b-gray-500 outline-none focus-within:border-black'
@@ -67,7 +67,7 @@ const LogInForm = ({ setShowSignUpForm }) => {
             required
           />
           <label className='w-1/3 text-end' htmlFor='pass'>
-            password:
+            contraseña:
           </label>
           <input
             className='w-3/5 border-b-2 border-b-gray-500 outline-none focus-within:border-black'
@@ -78,13 +78,13 @@ const LogInForm = ({ setShowSignUpForm }) => {
           />
         </div>
         <button className='w-full py-3 rounded-lg font-semibold bg-black text-white'>
-          Login
+          Ingresar
         </button>
         <button
           className='py-3 rounded-lg font-semibold border border-black  text-black'
           onClick={() => setShowSignUpForm(true)}
         >
-          Sign Up
+          Registrarse
         </button>
       </form>
       <Modal
