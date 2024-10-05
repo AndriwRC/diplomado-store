@@ -7,7 +7,7 @@ const SignIn = () => {
 
   return (
     <>
-      <h1 className='font-medium text-xl mb-6'>Welcome</h1>
+      <h1 className='font-medium text-xl mb-6'>Bienvenido</h1>
       {showSignUpForm ? (
         <SignUpForm setShowSignUpForm={setShowSignUpForm} formMode='Create' />
       ) : (

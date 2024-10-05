@@ -31,7 +31,8 @@ const Home = () => {
     },
   ];
 
-  const { products, productsLoading, setDiscount } = useContext(AppContext);
+  const { products, productsLoading, setDiscount, signOut } =
+    useContext(AppContext);
   const popularProducts = products?.slice(0, 3);
 
   return (
@@ -72,7 +73,12 @@ const Home = () => {
                 <div className='p-6'>
                   <h3 className='text-xl font-bold mb-2'>{offer.title}</h3>
                   <p className='text-red-500 font-semibold'>{offer.discount}</p>
-                  <Link to={'/store'} onClick={() => setDiscount(offer.value)}>
+                  <Link
+                    to={'/store'}
+                    onClick={() => {
+                      if (!signOut) setDiscount(offer.value);
+                    }}
+                  >
                     <button className='mt-4 bg-neutral-800 hover:bg-neutral-950 text-white font-bold py-2 px-4 rounded-lg'>
                       Comprar Ahora
                     </button>

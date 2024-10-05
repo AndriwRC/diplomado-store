@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { useFetch } from '../Hooks/useFetch';
 import { useAsideMenu } from '../Hooks/useAsideMenu';
 
@@ -56,6 +56,11 @@ const AppContextProvider = ({ children }) => {
   // User Auth
   const [signOut, setSignOut] = useState(true);
   const [account, setAccount] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    setIsAdmin(account?.rol === 'Administrador');
+  }, [account]);
 
   return (
     <AppContext.Provider
@@ -78,6 +83,7 @@ const AppContextProvider = ({ children }) => {
         setSignOut,
         account,
         setAccount,
+        isAdmin,
         API,
       }}
     >
