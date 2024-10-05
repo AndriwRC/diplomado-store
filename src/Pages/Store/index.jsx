@@ -11,7 +11,7 @@ const Store = () => {
   // Filter by category
   const { category } = useParams();
   if (category)
-    filteredProducts = filteredProducts.filter(
+    filteredProducts = filteredProducts?.filter(
       (product) => product.categoria.toLocaleLowerCase() === category
     );
 

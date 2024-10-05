@@ -43,7 +43,10 @@ const CategoriesMenu = ({ stateClassName, toggleMenu, showMenu }) => {
         <li>
           <NavLink
             to='/store/camiseta'
-            className={({ isActive }) => stateClassName(isActive)}
+            className={({ isActive }) =>
+              (isActive ? 'bg-gray-300 rounded-lg px-2 py-1 ' : 'bg-none ') +
+              'transition-all'
+            }
           >
             Camisetas
           </NavLink>
@@ -51,7 +54,10 @@ const CategoriesMenu = ({ stateClassName, toggleMenu, showMenu }) => {
         <li>
           <NavLink
             to='/store/jean'
-            className={({ isActive }) => stateClassName(isActive)}
+            className={({ isActive }) =>
+              (isActive ? 'bg-gray-300 rounded-lg px-2 py-1 ' : 'bg-none ') +
+              'transition-all'
+            }
           >
             Jeans
           </NavLink>
@@ -59,7 +65,10 @@ const CategoriesMenu = ({ stateClassName, toggleMenu, showMenu }) => {
         <li>
           <NavLink
             to='/store/zapato'
-            className={({ isActive }) => stateClassName(isActive)}
+            className={({ isActive }) =>
+              (isActive ? 'bg-gray-300 rounded-lg px-2 py-1 ' : 'bg-none ') +
+              'transition-all'
+            }
           >
             Zapatos
           </NavLink>
