@@ -13,7 +13,7 @@ const useFetch = (url, options = {}) => {
       try {
         const response = await fetch(url, options);
         if (!response.ok) {
-          throw new Error(`Error: ${response.statusText}`);
+          throw new Error(`Error: ${response.status} ¡Inténtalo Nuevamente!`);
         }
         const result = await response.json();
         if (isMounted) {
