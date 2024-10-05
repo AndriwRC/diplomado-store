@@ -8,7 +8,8 @@ const AppContextProvider = ({ children }) => {
   // Products
   const API = 'https://storeu-api-diplomado.vercel.app/api';
   const { data: products, loading: productsLoading } = useFetch(
-    `${API}/products`
+    `${API}/products`,
+    null
   );
 
   // Product Details
@@ -52,6 +53,10 @@ const AppContextProvider = ({ children }) => {
   // Discount
   const [discount, setDiscount] = useState(0);
 
+  // User Auth
+  const [signOut, setSignOut] = useState(true);
+  const [account, setAccount] = useState(null);
+
   return (
     <AppContext.Provider
       value={{
@@ -69,6 +74,11 @@ const AppContextProvider = ({ children }) => {
         removeProductFromCart,
         discount,
         setDiscount,
+        signOut,
+        setSignOut,
+        account,
+        setAccount,
+        API,
       }}
     >
       {children}

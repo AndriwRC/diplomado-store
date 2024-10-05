@@ -36,7 +36,7 @@ const useFetch = (url, options = {}) => {
     return () => {
       isMounted = false; // Limpiar el efecto cuando se desmonte el componente
     };
-  }, []);
+  }, [url, options]);
 
   return { data, loading, error };
 };
