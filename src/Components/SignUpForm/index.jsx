@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from 'react';
-import { useFetch } from '../../Hooks/useFetch';
 import { AppContext } from '../../Context';
 
 function SignUpForm({ setShowSignUpForm, formMode }) {

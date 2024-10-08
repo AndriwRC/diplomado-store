@@ -1,16 +1,35 @@
 import { createContext, useEffect, useState } from 'react';
-import { useFetch } from '../Hooks/useFetch';
 import { useAsideMenu } from '../Hooks/useAsideMenu';
+import axios from 'axios';
 
 const AppContext = createContext();
 
 const AppContextProvider = ({ children }) => {
+  // API requests base config
+  const api = axios.create({
+    baseURL: 'https://storeu-api-diplomado.vercel.app/api',
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
   // Products
-  const API = 'https://storeu-api-diplomado.vercel.app/api';
-  const { data: products, loading: productsLoading } = useFetch(
-    `${API}/products`,
-    null
-  );
+  const [products, setProducts] = useState(null);
+
+  const getProducts = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get('/products');
+      setProducts(response.data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError(error);
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   // Product Details
   const [productToShow, setProductToShow] = useState({});
@@ -66,7 +85,6 @@ const AppContextProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         products,
-        productsLoading,
         productToShow,
         showProduct,
         isDetailsOpen,
@@ -84,7 +102,11 @@ const AppContextProvider = ({ children }) => {
         account,
         setAccount,
         isAdmin,
-        API,
+        api,
+        loading,
+        setLoading,
+        error,
+        setError,
       }}
     >
       {children}

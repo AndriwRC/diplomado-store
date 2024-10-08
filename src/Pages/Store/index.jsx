@@ -4,7 +4,7 @@ import { AppContext } from '../../Context';
 import ProductCard from '../../Components/ProductCard';
 
 const Store = () => {
-  const { products, productsLoading } = useContext(AppContext);
+  const { products, loading: productsLoading } = useContext(AppContext);
 
   let filteredProducts = products;
 

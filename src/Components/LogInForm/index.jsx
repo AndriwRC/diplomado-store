@@ -1,35 +1,39 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context';
-import { useFetch } from '../../Hooks/useFetch';
 import { useAsideMenu as useModal } from '../../Hooks/useAsideMenu';
 import Modal from '../Modal';
 
 const LogInForm = ({ setShowSignUpForm }) => {
-  const { API, setSignOut, setAccount } = useContext(AppContext);
+  const { api, loading, setLoading, error, setError, setSignOut, setAccount } =
+    useContext(AppContext);
 
   // Login Request
-  const [options, setOptions] = useState(null);
-  const { data: user, loading, error } = useFetch(`${API}/login`, options);
-  console.log(error);
+  const login = async (data) => {
+    try {
+      setLoading(true);
+      const response = await api.post('/login/', data);
+      setAccount(response.data);
+      setSignOut(false);
+      setLoading(false);
+      navigate('/store');
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
+    }
+  };
 
   // FormData
   const form = useRef(null);
   const handleSignIn = () => {
     openMenu();
     const formData = new FormData(form.current);
-    const data = {
+    const userData = {
       nombreUsuario: formData.get('user'),
       contrasena: formData.get('password'),
     };
 
-    setOptions({
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+    login(userData);
   };
 
   // Notifications
@@ -37,13 +41,6 @@ const LogInForm = ({ setShowSignUpForm }) => {
 
   // Login Success
   const navigate = useNavigate();
-  useEffect(() => {
-    if (user) {
-      setAccount(user);
-      setSignOut(false);
-      navigate('/store');
-    }
-  }, [user]);
 
   return (
     <>

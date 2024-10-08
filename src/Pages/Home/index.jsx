@@ -31,8 +31,12 @@ const Home = () => {
     },
   ];
 
-  const { products, productsLoading, setDiscount, signOut } =
-    useContext(AppContext);
+  const {
+    products,
+    loading: productsLoading,
+    setDiscount,
+    signOut,
+  } = useContext(AppContext);
   const popularProducts = products?.slice(0, 3);
 
   return (
@@ -101,7 +105,7 @@ const Home = () => {
               Cargando Productos...
             </p>
           ) : (
-            popularProducts.map((product) => (
+            popularProducts?.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))
           )}
