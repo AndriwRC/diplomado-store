@@ -1,11 +1,9 @@
 import { useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context';
-import { useAsideMenu as useModal } from '../../Hooks/useAsideMenu';
-import Modal from '../Modal';
 
 const LogInForm = ({ setShowSignUpForm }) => {
-  const { api, loading, setLoading, error, setError, setSignOut, setAccount } =
+  const { api, setLoading, setError, setSignOut, setAccount } =
     useContext(AppContext);
 
   // Login Request
@@ -16,6 +14,7 @@ const LogInForm = ({ setShowSignUpForm }) => {
       setAccount(response.data);
       setSignOut(false);
       setLoading(false);
+      setError(false);
       navigate('/store');
     } catch (err) {
       setLoading(false);
@@ -26,7 +25,6 @@ const LogInForm = ({ setShowSignUpForm }) => {
   // FormData
   const form = useRef(null);
   const handleSignIn = () => {
-    openMenu();
     const formData = new FormData(form.current);
     const userData = {
       nombreUsuario: formData.get('user'),
@@ -35,9 +33,6 @@ const LogInForm = ({ setShowSignUpForm }) => {
 
     login(userData);
   };
-
-  // Notifications
-  const { isOpen, openMenu, closeMenu } = useModal(false);
 
   // Login Success
   const navigate = useNavigate();
@@ -84,12 +79,6 @@ const LogInForm = ({ setShowSignUpForm }) => {
           Registrarse
         </button>
       </form>
-      <Modal
-        isOpen={isOpen}
-        close={closeMenu}
-        isLoading={loading}
-        error={error}
-      />
     </>
   );
 };

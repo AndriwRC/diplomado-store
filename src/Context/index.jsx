@@ -81,9 +81,21 @@ const AppContextProvider = ({ children }) => {
     setIsAdmin(account?.rol === 'Administrador');
   }, [account]);
 
+  // Notifications
+  const {
+    isOpen: isModalOpen,
+    openMenu: openModal,
+    closeMenu: closeModal,
+  } = useAsideMenu(false);
+
   return (
     <AppContext.Provider
       value={{
+        api,
+        loading,
+        setLoading,
+        error,
+        setError,
         products,
         productToShow,
         showProduct,
@@ -102,11 +114,9 @@ const AppContextProvider = ({ children }) => {
         account,
         setAccount,
         isAdmin,
-        api,
-        loading,
-        setLoading,
-        error,
-        setError,
+        isModalOpen,
+        openModal,
+        closeModal,
       }}
     >
       {children}
