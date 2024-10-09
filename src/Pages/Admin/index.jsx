@@ -22,7 +22,6 @@ const Admin = () => {
     try {
       setLoading(true);
       const response = await api.get(`/products/${account.id}`);
-      console.log(response);
       setProducts(response.data);
       setLoading(false);
       setError(false);
@@ -35,7 +34,7 @@ const Admin = () => {
   const handleCreate = async (data) => {
     try {
       setLoading(true);
-      const response = await axios.post('/api/products', data);
+      const response = await api.post('/api/products', data);
       setProducts([...products, response.data]);
       setShowForm('list');
       setLoading(false);
@@ -48,7 +47,7 @@ const Admin = () => {
   const handleUpdate = async (data) => {
     try {
       setLoading(true);
-      const response = await axios.put(
+      const response = await api.put(
         `/api/products/${selectedProduct.id}`,
         data
       );
@@ -68,7 +67,7 @@ const Admin = () => {
   const handleDelete = async (id) => {
     try {
       setLoading(true);
-      await axios.delete(`/api/products/${id}`);
+      await api.delete(`/product/${id}`);
       setProducts(products.filter((product) => product.id !== id));
       setLoading(false);
     } catch (err) {
@@ -83,6 +82,12 @@ const Admin = () => {
     closeMenu: closeForm,
   } = useAsideMenu(false);
 
+  const loadProductData = (product) => {
+    setSelectedProduct(product);
+    openForm();
+    setShowForm('update');
+  };
+
   return (
     <>
       <h1 className='font-medium text-xl text-center'>Administrador</h1>
@@ -92,6 +97,7 @@ const Admin = () => {
           onClick={() => {
             openForm();
             setShowForm('create');
+            setSelectedProduct({});
           }}
           disabled={loading}
         >
@@ -107,14 +113,22 @@ const Admin = () => {
             Cargando Productos...
           </p>
         ) : (
-          products.map((item) => <ProductCard key={item.id} product={item} />)
+          products.map((item) => (
+            <ProductCard
+              key={item.id}
+              adminMode={true}
+              loadProductData={loadProductData}
+              deleteProduct={handleDelete}
+              product={item}
+            />
+          ))
         )}
       </div>
       <AsideMenu
         isOpen={isFormOpen}
         closeMenu={closeForm}
         title={
-          showForm === 'create' ? 'Crear Nuevo Producto' : 'Editar Producto'
+          showForm === 'create' ? 'Crear Nuevo Producto' : 'Actualizar Producto'
         }
       >
         <ProductForm
