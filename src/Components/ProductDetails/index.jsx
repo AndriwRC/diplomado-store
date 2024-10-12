@@ -18,8 +18,8 @@ const ProductDetails = () => {
     >
       <figure className='px-6 w-2/3 max-h-52 self-center'>
         <img
-          className='w-full h-full rounded-lg'
-          src={`https://loremflickr.com/320/240`}
+          className='w-full h-full rounded-lg object-cover'
+          src={`${product.imgUrl}`}
           alt={product.nombre}
         />
       </figure>
@@ -27,6 +27,8 @@ const ProductDetails = () => {
         <span className='text-2xl mb-2'>${product.precio}</span>
         <span className='text-base'>{product.nombre}</span>
         <span className='font-light text-sm'>{product.descripcion}</span>
+        <span className='text-base'>Talla: {product.talla}</span>
+        <span className='text-base'>Fit: {product.fit}</span>
       </p>
       <div className='p-6'>
         <button

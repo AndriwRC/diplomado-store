@@ -81,7 +81,7 @@ const ProductCard = ({
       <figure className='relative w-full h-4/5'>
         <img
           className='w-full h-full object-cover rounded-lg'
-          src={`${'https://loremflickr.com/320/240'}`}
+          src={`${product.imgUrl}`}
           alt='headphones'
         />
         <span className='absolute bottom-0 left-0 m-2 px-3 rounded-lg bg-white/60 text-xs'>

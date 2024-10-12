@@ -11,13 +11,11 @@ const OrderItem = ({ product }) => {
         <figure className='w-20 h-20'>
           <img
             className='w-full h-full rounded-lg object-cover'
-            src={`https://loremflickr.com/320/240`}
+            src={`${product.imgUrl}`}
             alt={product.nombre}
           />
         </figure>
-        <p className='text-sm font-light'>{product.nombre}</p>
-      </div>
-      <div className='flex items-center gap-2'>
+        <p className='text-sm font-light text-wrap'>{product.nombre}</p>
         <p className='text-lg font-medium'>${product.precio}</p>
         <HiX
           onClick={() => removeProductFromCart(product.id)}
