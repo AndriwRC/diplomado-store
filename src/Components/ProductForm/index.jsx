@@ -26,7 +26,7 @@ const ProductForm = ({ formMode, onSubmit, loading, defaultValues }) => {
     <form
       ref={form}
       onSubmit={handleSubmit}
-      className='flex flex-col justify-between gap-2 w-full px-6 overflow-scroll'
+      className='flex flex-col justify-between gap-2 w-full px-6 pb-6 overflow-scroll'
     >
       <label htmlFor='nombre'>Nombre:</label>
       <input
