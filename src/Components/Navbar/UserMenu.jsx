@@ -4,8 +4,7 @@ import { HiOutlineUser } from 'react-icons/hi';
 import { AppContext } from '../../Context';
 
 const UserMenu = ({ stateClassName, toggleMenu, showMenu }) => {
-  const { signOut, setAccount, account, isAdmin, setModuleAdminOpen } =
-    useContext(AppContext);
+  const { signOut, setAccount, account, isAdmin } = useContext(AppContext);
 
   const display = showMenu ? 'flex' : 'hidden';
 
@@ -26,9 +25,6 @@ const UserMenu = ({ stateClassName, toggleMenu, showMenu }) => {
                 <NavLink
                   to='/admin'
                   className={({ isActive }) => {
-                    isActive
-                      ? setModuleAdminOpen(true)
-                      : setModuleAdminOpen(false);
                     stateClassName(isActive);
                   }}
                 >

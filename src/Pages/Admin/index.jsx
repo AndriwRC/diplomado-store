@@ -1,14 +1,20 @@
 import { useState, useEffect, useContext } from 'react';
 import { useAsideMenu } from '../../Hooks/useAsideMenu';
-import { HiPlus } from 'react-icons/hi';
+import { HiPlus, HiOutlineRefresh } from 'react-icons/hi';
 import { AppContext } from '../../Context';
 import AsideMenu from '../../Components/AsideMenu';
 import ProductCard from '../../Components/ProductCard';
 import ProductForm from '../../Components/ProductForm';
 
 const Admin = () => {
-  const { api, account, loading, setLoading, setError } =
-    useContext(AppContext);
+  const {
+    api,
+    account,
+    loading,
+    setLoading,
+    setError,
+    getProducts: reloadStoreProducts,
+  } = useContext(AppContext);
   const [products, setProducts] = useState([]);
   const [showForm, setShowForm] = useState('list');
   const [selectedProduct, setSelectedProduct] = useState({});
@@ -104,7 +110,7 @@ const Admin = () => {
   return (
     <>
       <h1 className='font-medium text-xl text-center'>Administrador</h1>
-      <div className='flex justify-between m-4'>
+      <div className='flex justify-between m-4 gap-4'>
         <button
           className='flex  items-center gap-2 w-fit py-3 px-6 rounded-lg font-semibold bg-black text-white'
           onClick={() => {
@@ -118,6 +124,18 @@ const Admin = () => {
             <HiPlus className='h-5 w-5 text-white' />
           </span>
           Nuevo Producto
+        </button>
+        <button
+          className='flex  items-center gap-2 w-fit py-3 px-6 rounded-lg font-semibold bg-black text-white'
+          onClick={() => {
+            reloadStoreProducts();
+          }}
+          disabled={loading}
+        >
+          <span>
+            <HiOutlineRefresh className='h-5 w-5 text-white' />
+          </span>
+          Actualizar Tienda
         </button>
       </div>
       <div className='grid grid-cols-auto-fit-56 justify-center gap-4 w-full max-w-screen-lg'>

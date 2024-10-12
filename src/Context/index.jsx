@@ -12,7 +12,6 @@ const AppContextProvider = ({ children }) => {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [moduleAdminOpen, setModuleAdminOpen] = useState(false);
 
   // Products
   const [products, setProducts] = useState(null);
@@ -31,7 +30,7 @@ const AppContextProvider = ({ children }) => {
 
   useEffect(() => {
     getProducts();
-  }, [moduleAdminOpen]);
+  }, []);
 
   // Product Details
   const [productToShow, setProductToShow] = useState({});
@@ -103,6 +102,7 @@ const AppContextProvider = ({ children }) => {
         error,
         setError,
         products,
+        getProducts,
         productToShow,
         showProduct,
         isDetailsOpen,
@@ -120,7 +120,6 @@ const AppContextProvider = ({ children }) => {
         account,
         setAccount,
         isAdmin,
-        setModuleAdminOpen,
         isModalOpen,
         openModal,
         closeModal,
