@@ -1,12 +1,14 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context';
 import AsideMenu from '../AsideMenu';
 import OrderItem from '../OrderItem';
 
 const Cart = () => {
-  const { cartProducts, isCartOpen, closeCart, discount } =
+  const { cartProducts, isCartOpen, closeCart, discount, signOut } =
     useContext(AppContext);
+
+  const navigate = useNavigate();
 
   const totalPrice = parseFloat(
     cartProducts
@@ -30,11 +32,7 @@ const Cart = () => {
     >
       <div className='px-6 overflow-y-scroll flex-1'>
         {cartProducts.map((product) => (
-          <OrderItem
-            key={product.id}
-            product={product}
-            // handleDelete={handleDelete}
-          />
+          <OrderItem key={product.id} product={product} />
         ))}
       </div>
       <div className='p-6'>
@@ -55,17 +53,15 @@ const Cart = () => {
             ${applyDiscount(discount, totalPrice)}
           </span>
         </p>
-        <Link to='/my-orders/last'>
-          <button
-            className='bg-black py-3 text-white w-full rounded-lg'
-            // onClick={() => {
-            //   if (!signOut) handleCheckout();
-            //   closeCheckoutSideMenu();
-            // }}
-          >
-            Comprar
-          </button>
-        </Link>
+        <button
+          className='bg-black py-3 text-white w-full rounded-lg'
+          onClick={() => {
+            if (signOut) navigate('/sign-in');
+            closeCart();
+          }}
+        >
+          Comprar
+        </button>
       </div>
     </AsideMenu>
   );
