@@ -42,6 +42,7 @@ const Admin = () => {
       setShowForm('list');
       setLoading(false);
       setError(false);
+      closeForm();
     } catch (err) {
       setError(err.message);
       setLoading(false);
@@ -64,6 +65,7 @@ const Admin = () => {
       setShowForm('list');
       setLoading(false);
       setError(false);
+      closeForm();
     } catch (err) {
       setError(err.message);
       setLoading(false);

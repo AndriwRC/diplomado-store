@@ -1,34 +1,35 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useRef } from 'react';
 import { AppContext } from '../../Context';
 
 function SignUpForm({ setShowSignUpForm, formMode }) {
-  const { API } = useContext(AppContext);
+  const { api, setLoading, setError } = useContext(AppContext);
+  const signUp = async (data) => {
+    try {
+      setLoading(true);
+      const response = await api.post('/user', data);
+      console.log(response.data);
+      setLoading(false);
+      setError(false);
+      setShowSignUpForm(false);
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
+    }
+  };
 
   const form = useRef(null);
-  const [options, setOptions] = useState(null);
-  const { data: newUser, loading, error } = useFetch(`${API}/`, options);
 
   const createAccount = () => {
     const formData = new FormData(form.current);
     const newAccount = {
-      name: formData.get(''),
-      email: formData.get(''),
-      password: formData.get(''),
+      nombre: formData.get('name'),
+      apellido: formData.get('lastName'),
+      nombreUsuario: formData.get('username'),
+      correo: formData.get('email'),
+      contrasena: formData.get('pass'),
     };
-    setOptions({
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newAccount),
-    });
+    signUp(newAccount);
   };
-
-  useEffect(() => {
-    if (newUser) {
-      setShowSignUpForm(false);
-    }
-  }, [newUser]);
 
   return (
     <form
@@ -39,10 +40,29 @@ function SignUpForm({ setShowSignUpForm, formMode }) {
         createAccount();
       }}
     >
+      <label htmlFor='username'>Usuario:</label>
+      <input
+        className='mt-1 mb-6 p-3 border border-black rounded-lg text-sm'
+        id='username'
+        name='username'
+        type='text'
+        placeholder='Peter'
+        required
+      />
       <label htmlFor='name'>Nombre:</label>
       <input
         className='mt-1 mb-6 p-3 border border-black rounded-lg text-sm'
         id='name'
+        name='name'
+        type='text'
+        placeholder='Peter'
+        required
+      />
+      <label htmlFor='lastName'>Apellido:</label>
+      <input
+        className='mt-1 mb-6 p-3 border border-black rounded-lg text-sm'
+        id='lastName'
+        name='lastName'
         type='text'
         placeholder='Peter'
         required
@@ -51,6 +71,7 @@ function SignUpForm({ setShowSignUpForm, formMode }) {
       <input
         className='mt-1 mb-6 p-3 border border-black rounded-lg text-sm'
         id='email'
+        name='email'
         type='email'
         placeholder='h1@helloworld.com'
         required
@@ -59,6 +80,7 @@ function SignUpForm({ setShowSignUpForm, formMode }) {
       <input
         className='mt-1 mb-6 p-3 border border-black rounded-lg text-sm'
         id='pass'
+        name='pass'
         type='password'
         placeholder='1234'
         required
