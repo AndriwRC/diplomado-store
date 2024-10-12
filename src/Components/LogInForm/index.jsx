@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context';
 
 const LogInForm = ({ setShowSignUpForm }) => {
-  const { api, setLoading, setError, setSignOut, setAccount } =
+  const { api, setLoading, setError, setAccount, setSignOut } =
     useContext(AppContext);
 
   // Login Request

@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import { useAsideMenu } from '../Hooks/useAsideMenu';
+import { useLocalStorage } from '../Hooks/useLocalStorage';
 import axios from 'axios';
 
 const AppContext = createContext();
@@ -75,11 +76,15 @@ const AppContextProvider = ({ children }) => {
 
   // User Auth
   const [signOut, setSignOut] = useState(true);
-  const [account, setAccount] = useState(null);
+  const { item: account, saveItem: setAccount } = useLocalStorage(
+    'account',
+    null
+  );
   const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     setIsAdmin(account?.rol === 'Administrador');
+    setSignOut(!account);
   }, [account]);
 
   // Notifications
