@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from 'react';
 import { useAsideMenu } from '../../Hooks/useAsideMenu';
 import { HiPlus } from 'react-icons/hi';
 import { AppContext } from '../../Context';
-import axios from 'axios';
 import AsideMenu from '../../Components/AsideMenu';
 import ProductCard from '../../Components/ProductCard';
 import ProductForm from '../../Components/ProductForm';
@@ -34,10 +33,15 @@ const Admin = () => {
   const handleCreate = async (data) => {
     try {
       setLoading(true);
-      const response = await api.post('/api/products', data);
+      const response = await api.post('/product', data, {
+        headers: {
+          Authorization: `bearer ${account?.token}`,
+        },
+      });
       setProducts([...products, response.data]);
       setShowForm('list');
       setLoading(false);
+      setError(false);
     } catch (err) {
       setError(err.message);
       setLoading(false);
@@ -47,10 +51,11 @@ const Admin = () => {
   const handleUpdate = async (data) => {
     try {
       setLoading(true);
-      const response = await api.put(
-        `/api/products/${selectedProduct.id}`,
-        data
-      );
+      const response = await api.put(`/product/${selectedProduct.id}`, data, {
+        headers: {
+          Authorization: `bearer ${account?.token}`,
+        },
+      });
       setProducts(
         products.map((product) =>
           product.id === selectedProduct.id ? response.data : product
@@ -58,6 +63,7 @@ const Admin = () => {
       );
       setShowForm('list');
       setLoading(false);
+      setError(false);
     } catch (err) {
       setError(err.message);
       setLoading(false);
@@ -67,9 +73,14 @@ const Admin = () => {
   const handleDelete = async (id) => {
     try {
       setLoading(true);
-      await api.delete(`/product/${id}`);
+      await api.delete(`/product/${id}`, {
+        headers: {
+          Authorization: `bearer ${account?.token}`,
+        },
+      });
       setProducts(products.filter((product) => product.id !== id));
       setLoading(false);
+      setError(false);
     } catch (err) {
       setError(err.message);
       setLoading(false);
