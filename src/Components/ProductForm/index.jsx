@@ -20,6 +20,7 @@ const ProductForm = ({ formMode, onSubmit, loading, defaultValues }) => {
       imgUrl: formData.get('imgUrl'),
     };
     onSubmit(productData);
+    form.current.reset();
   };
 
   return (
