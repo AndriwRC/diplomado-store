@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 
 const ProductForm = ({ formMode, onSubmit, loading, defaultValues }) => {
+  const createMode = formMode === 'create';
   const form = useRef(null);
 
   const handleSubmit = (e) => {
@@ -62,7 +63,9 @@ const ProductForm = ({ formMode, onSubmit, loading, defaultValues }) => {
         className='mb-4 border-b-2 border-b-gray-500 outline-none focus-within:border-black'
       >
         <option value={defaultValues?.categoria || ''}>
-          Categoría por defecto: {defaultValues?.categoria || ''}
+          {createMode
+            ? 'Seleccione una categoría:'
+            : `Categoría por defecto:  ${defaultValues?.categoria}`}
         </option>
         <option value='Camiseta'>Camisetas</option>
         <option value='Jean'>Jeans</option>
@@ -71,20 +74,12 @@ const ProductForm = ({ formMode, onSubmit, loading, defaultValues }) => {
       </select>
 
       <label htmlFor='talla'>Talla:</label>
-      <select
+      <input
         id='talla'
         name='talla'
         className='mb-4 border-b-2 border-b-gray-500 outline-none focus-within:border-black'
-      >
-        <option value={defaultValues?.talla || ''}>
-          Talla por defecto: {defaultValues?.talla || ''}
-        </option>
-        <option value='XS'>XS</option>
-        <option value='S'>S</option>
-        <option value='M'>M</option>
-        <option value='L'>L</option>
-        <option value='XL'>XL</option>
-      </select>
+        defaultValue={defaultValues?.talla || ''}
+      />
 
       <label htmlFor='color'>Color:</label>
       <input
@@ -102,7 +97,9 @@ const ProductForm = ({ formMode, onSubmit, loading, defaultValues }) => {
         className='mb-4 border-b-2 border-b-gray-500 outline-none focus-within:border-black'
       >
         <option value={defaultValues?.fit || ''}>
-          Ajuste por defecto: {defaultValues?.fit || ''}
+          {createMode
+            ? 'Seleccione un ajuste:'
+            : `Ajuste por defecto:  ${defaultValues?.fit}`}
         </option>
         <option value='Regular'>Regular</option>
         <option value='Slim-fit'>Slim Fit</option>
@@ -116,7 +113,9 @@ const ProductForm = ({ formMode, onSubmit, loading, defaultValues }) => {
         className='mb-4 border-b-2 border-b-gray-500 outline-none focus-within:border-black'
       >
         <option value={defaultValues?.genero || ''}>
-          Opción por defecto: {defaultValues?.genero || ''}
+          {createMode
+            ? 'Seleccione un genero:'
+            : `Género por defecto:  ${defaultValues?.genero}`}
         </option>
         <option value='Hombre'>Hombre</option>
         <option value='Mujer'>Mujer</option>
@@ -160,7 +159,7 @@ const ProductForm = ({ formMode, onSubmit, loading, defaultValues }) => {
       >
         {loading
           ? 'Procesando...'
-          : formMode === 'create'
+          : createMode
           ? 'Crear Producto'
           : 'Actualizar Producto'}
       </button>

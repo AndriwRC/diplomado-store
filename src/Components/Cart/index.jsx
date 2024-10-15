@@ -5,7 +5,7 @@ import AsideMenu from '../AsideMenu';
 import OrderItem from '../OrderItem';
 
 const Cart = () => {
-  const { cartProducts, isCartOpen, closeCart, discount, signOut } =
+  const { cartProducts, clearCart, isCartOpen, closeCart, discount, signOut } =
     useContext(AppContext);
 
   const navigate = useNavigate();
@@ -57,6 +57,7 @@ const Cart = () => {
           className='bg-black py-3 text-white w-full rounded-lg'
           onClick={() => {
             if (signOut) navigate('/sign-in');
+            if (!signOut) clearCart();
             closeCart();
           }}
         >

@@ -73,6 +73,17 @@ const CategoriesMenu = ({ stateClassName, toggleMenu, showMenu }) => {
             Zapatos
           </NavLink>
         </li>
+        <li>
+          <NavLink
+            to='/store/otros'
+            className={({ isActive }) =>
+              (isActive ? 'bg-gray-300 rounded-lg px-2 py-1 ' : 'bg-none ') +
+              'transition-all'
+            }
+          >
+            Otros
+          </NavLink>
+        </li>
       </div>
     </ul>
   );

@@ -63,6 +63,14 @@ const AppContextProvider = ({ children }) => {
     setCartProducts(filteredProducts);
   };
 
+  const clearCart = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setCartProducts([]);
+    }, 2000);
+  };
+
   const {
     isOpen: isCartOpen,
     openMenu: openCart,
@@ -113,6 +121,7 @@ const AppContextProvider = ({ children }) => {
         cartProducts,
         addProductToCart,
         removeProductFromCart,
+        clearCart,
         discount,
         setDiscount,
         signOut,
