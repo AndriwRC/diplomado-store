@@ -8,7 +8,7 @@ import NotFound from '../Pages/NotFound';
 import SignIn from '../Pages/SignIn';
 
 const Routes = () => {
-  const { signOut, isAdmin } = useContext(AppContext);
+  const { isAdmin } = useContext(AppContext);
 
   return useRoutes([
     { path: '/', element: <Home /> },
@@ -18,11 +18,11 @@ const Routes = () => {
     },
     {
       path: '/store',
-      element: signOut ? <Navigate replace to={'/sign-in'} /> : <Store />,
+      element: <Store />,
     },
     {
       path: '/store/:category',
-      element: signOut ? <Navigate replace to={'/sign-in'} /> : <Store />,
+      element: <Store />,
     },
     { path: '/sign-in', element: <SignIn /> },
     { path: '/*', element: <NotFound /> },

@@ -39,12 +39,12 @@ const Store = () => {
           <p className='col-span-4 text-center font-light'>
             Cargando Productos...
           </p>
-        ) : filteredProducts.length === 0 ? (
+        ) : filteredProducts?.length === 0 ? (
           <p className='col-span-4 text-center font-light'>
             No tenemos esta clase de producto en el momento. {':('}
           </p>
         ) : (
-          filteredProducts.map((item) => (
+          filteredProducts?.map((item) => (
             <ProductCard key={item.id} product={item} />
           ))
         )}

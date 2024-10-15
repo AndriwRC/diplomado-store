@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   HiPlus,
   HiCheck,
@@ -13,8 +14,10 @@ const ProductCard = ({
   loadProductData,
   deleteProduct,
 }) => {
-  const { showProduct, cartProducts, addProductToCart } =
+  const { showProduct, cartProducts, addProductToCart, signOut } =
     useContext(AppContext);
+
+  const navigate = useNavigate();
 
   const isInCart = cartProducts.find((item) => item.id === product.id);
 
@@ -27,7 +30,11 @@ const ProductCard = ({
           }`}
           onClick={(e) => {
             e.stopPropagation();
-            addProductToCart(product);
+            if (signOut) {
+              navigate('/sign-in');
+            } else {
+              addProductToCart(product);
+            }
           }}
         >
           <span>

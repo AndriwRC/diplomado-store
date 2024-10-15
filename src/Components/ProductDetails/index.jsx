@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../Context';
 import AsideMenu from '../AsideMenu';
 
@@ -8,7 +9,10 @@ const ProductDetails = () => {
     isDetailsOpen,
     closeDetails,
     addProductToCart,
+    signOut,
   } = useContext(AppContext);
+
+  const navigate = useNavigate();
 
   return (
     <AsideMenu
@@ -34,7 +38,11 @@ const ProductDetails = () => {
         <button
           className='bg-black py-3 text-white w-full rounded-lg'
           onClick={() => {
-            addProductToCart(product);
+            if (signOut) {
+              navigate('/sign-in');
+            } else {
+              addProductToCart(product);
+            }
             closeDetails();
           }}
         >
